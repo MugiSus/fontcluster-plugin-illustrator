@@ -25,11 +25,11 @@ jobs:
           curl -L https://raw.githubusercontent.com/Adobe-CEP/CEP-Resources/master/ZXPSignCMD/4.1.3/macOS/ZXPSignCmd -o ZXPSignCmd
           chmod +x ZXPSignCmd
 
-          mkdir FontClusterIllustrator
-          cp -R CSXS client host FontClusterIllustrator/
+          mkdir FontClusterApplyPluginIllustrator
+          cp -R CSXS client host FontClusterApplyPluginIllustrator/
 
           printf '%s' "$ZXP_CERT" | base64 -D > zxp-cert.p12
-          ./ZXPSignCmd -sign ./FontClusterIllustrator ./FontClusterApplyPluginIllustrator.zxp ./zxp-cert.p12 "$ZXP_CERT_PASSWORD"
+          ./ZXPSignCmd -sign ./FontClusterApplyPluginIllustrator ./FontClusterApplyPluginIllustrator.zxp ./zxp-cert.p12 "$ZXP_CERT_PASSWORD"
 
       - uses: softprops/action-gh-release@v2
         with:
