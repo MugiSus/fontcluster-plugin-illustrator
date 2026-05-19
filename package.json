@@ -1,0 +1,10 @@
+{
+  "name": "fontcluster-plugin-illustrator",
+  "version": "0.0.0",
+  "description": "Adobe Illustrator CEP extension for applying the latest Fontcluster font selection.",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "check": "node --check client/index.js"
+  }
+}
