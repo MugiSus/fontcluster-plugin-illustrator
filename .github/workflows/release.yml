@@ -29,8 +29,8 @@ jobs:
           cp -R CSXS client host FontClusterIllustrator/
 
           printf '%s' "$ZXP_CERT" | base64 -D > zxp-cert.p12
-          ./ZXPSignCmd -sign ./FontClusterIllustrator ./FontClusterIllustrator.zxp ./zxp-cert.p12 "$ZXP_CERT_PASSWORD"
+          ./ZXPSignCmd -sign ./FontClusterIllustrator ./FontClusterApplyPluginIllustrator.zxp ./zxp-cert.p12 "$ZXP_CERT_PASSWORD"
 
       - uses: softprops/action-gh-release@v2
         with:
-          files: FontClusterIllustrator.zxp
+          files: FontClusterApplyPluginIllustrator.zxp
