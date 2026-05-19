@@ -48,17 +48,51 @@
     window.__adobe_cep__.evalScript(script, callback);
   }
 
+  function values(record) {
+    var result = [];
+
+    if (!record) {
+      return result;
+    }
+
+    for (var key in record) {
+      if (record.hasOwnProperty(key)) {
+        result.push(record[key]);
+      }
+    }
+
+    return result;
+  }
+
+  function stringLiteral(value) {
+    return JSON.stringify(value == null ? "" : String(value));
+  }
+
+  function stringArrayLiteral(items) {
+    return "[" + items.map(stringLiteral).join(",") + "]";
+  }
+
   function applyFont(font) {
     state.applying = true;
     setMessage("Applying " + font.font_name + "...");
 
-    var fontJson = JSON.stringify(font);
-    var sessionJson = JSON.stringify(state.session);
     var script =
       "fontclusterApplyFont(" +
-      JSON.stringify(fontJson) +
+      stringLiteral(font.family_name) +
       "," +
-      JSON.stringify(sessionJson) +
+      stringLiteral(font.font_name) +
+      "," +
+      stringLiteral(font.style_name) +
+      "," +
+      stringArrayLiteral(values(font.preferred_family_names)) +
+      "," +
+      stringArrayLiteral(values(font.family_names)) +
+      "," +
+      stringArrayLiteral(values(font.preferred_style_names)) +
+      "," +
+      stringArrayLiteral(values(font.style_names)) +
+      "," +
+      stringLiteral(state.session && state.session.preview_text) +
       "," +
       JSON.stringify(state.modifiedDate) +
       ")";

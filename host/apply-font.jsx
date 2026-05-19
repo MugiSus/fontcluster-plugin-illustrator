@@ -1,23 +1,3 @@
-function fontclusterParseJson(json) {
-  return JSON.parse(json);
-}
-
-function fontclusterValues(record) {
-  var values = [];
-
-  if (!record) {
-    return values;
-  }
-
-  for (var key in record) {
-    if (record.hasOwnProperty(key)) {
-      values.push(record[key]);
-    }
-  }
-
-  return values;
-}
-
 function fontclusterContains(values, value) {
   for (var i = 0; i < values.length; i += 1) {
     if (values[i] === value) {
@@ -28,13 +8,21 @@ function fontclusterContains(values, value) {
   return false;
 }
 
-function fontclusterGetFont(font) {
-  var familyCandidates = [font.family_name, font.font_name]
-    .concat(fontclusterValues(font.preferred_family_names))
-    .concat(fontclusterValues(font.family_names));
-  var styleCandidates = [font.style_name]
-    .concat(fontclusterValues(font.preferred_style_names))
-    .concat(fontclusterValues(font.style_names));
+function fontclusterGetFont(
+  familyName,
+  fontName,
+  styleName,
+  preferredFamilyNames,
+  familyNames,
+  preferredStyleNames,
+  styleNames
+) {
+  var familyCandidates = [familyName, fontName]
+    .concat(preferredFamilyNames || [])
+    .concat(familyNames || []);
+  var styleCandidates = [styleName]
+    .concat(preferredStyleNames || [])
+    .concat(styleNames || []);
 
   for (var i = 0; i < app.textFonts.length; i += 1) {
     var textFont = app.textFonts[i];
@@ -44,7 +32,7 @@ function fontclusterGetFont(font) {
 
     if (
       (fontclusterContains(familyCandidates, family) &&
-        (!font.style_name || fontclusterContains(styleCandidates, style))) ||
+        (!styleName || fontclusterContains(styleCandidates, style))) ||
       fontclusterContains(familyCandidates, name)
     ) {
       return textFont;
@@ -76,14 +64,30 @@ function fontclusterApplyTextFont(textFrame, textFont) {
   textFrame.textRange.characterAttributes.textFont = textFont;
 }
 
-function fontclusterApplyFont(fontJson, sessionJson, modifiedDate) {
+function fontclusterApplyFont(
+  familyName,
+  fontName,
+  styleName,
+  preferredFamilyNames,
+  familyNames,
+  preferredStyleNames,
+  styleNames,
+  previewText,
+  modifiedDate
+) {
   try {
-    var font = fontclusterParseJson(fontJson);
-    var session = fontclusterParseJson(sessionJson);
-    var textFont = fontclusterGetFont(font);
+    var textFont = fontclusterGetFont(
+      familyName,
+      fontName,
+      styleName,
+      preferredFamilyNames,
+      familyNames,
+      preferredStyleNames,
+      styleNames
+    );
 
     if (!textFont) {
-      return "false: Font not available in Illustrator: " + font.family_name;
+      return "false: Font not available in Illustrator: " + familyName;
     }
 
     var document = app.documents.length > 0 ? app.activeDocument : app.documents.add();
@@ -91,8 +95,7 @@ function fontclusterApplyFont(fontJson, sessionJson, modifiedDate) {
 
     if (frames.length === 0) {
       var textFrame = document.textFrames.add();
-      textFrame.contents =
-        (session && session.preview_text) || font.font_name || font.family_name;
+      textFrame.contents = previewText || fontName || familyName;
       textFrame.textRange.characterAttributes.size = 16;
       frames.push(textFrame);
     }
