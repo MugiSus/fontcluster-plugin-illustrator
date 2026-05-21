@@ -64,6 +64,16 @@ function fontclusterApplyTextFont(textFrame, textFont) {
   textFrame.textRange.characterAttributes.textFont = textFont;
 }
 
+function fontclusterCreateTextFrame(document, contents) {
+  var centerPoint = document.activeView.centerPoint;
+  var textFrame = document.textFrames.pointText([centerPoint[0], centerPoint[1]]);
+
+  textFrame.contents = contents;
+  textFrame.textRange.characterAttributes.size = 16;
+
+  return textFrame;
+}
+
 function fontclusterApplyFont(
   familyName,
   fontName,
@@ -94,10 +104,7 @@ function fontclusterApplyFont(
     var frames = fontclusterSelectedTextFrames();
 
     if (frames.length === 0) {
-      var textFrame = document.textFrames.add();
-      textFrame.contents = previewText || fontName || familyName;
-      textFrame.textRange.characterAttributes.size = 16;
-      frames.push(textFrame);
+      frames.push(fontclusterCreateTextFrame(document, previewText || fontName || familyName));
     }
 
     for (var i = 0; i < frames.length; i += 1) {

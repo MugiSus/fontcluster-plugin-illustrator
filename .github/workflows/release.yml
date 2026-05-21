@@ -15,6 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - run: node scripts/sync-manifest-version.js "${GITHUB_REF_NAME#v}"
+
       - run: node --check client/index.js
 
       - name: Build ZXP
