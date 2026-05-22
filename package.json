@@ -11,9 +11,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "typecheck": "tsc --noEmit",
-    "check": "tsc --noEmit && node --check --input-type=commonjs < host/apply-font.jsx",
-    "sync-version": "node scripts/sync-manifest-version.js",
-    "version": "node scripts/sync-manifest-version.js && git add CSXS/manifest.xml"
+    "check": "tsc --noEmit && node --check --input-type=commonjs < host/apply-font.jsx"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.13",
