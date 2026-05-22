@@ -17,7 +17,20 @@ jobs:
 
       - run: node scripts/sync-manifest-version.js "${GITHUB_REF_NAME#v}"
 
-      - run: node --check client/index.js
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - run: pnpm check
 
       - name: Build ZXP
         env:
@@ -28,7 +41,7 @@ jobs:
           chmod +x ZXPSignCmd
 
           mkdir FontClusterApplyPluginIllustrator
-          cp -R CSXS client host FontClusterApplyPluginIllustrator/
+          cp -R CSXS dist host FontClusterApplyPluginIllustrator/
 
           printf '%s' "$ZXP_CERT" | base64 -D > zxp-cert.p12
           ./ZXPSignCmd -sign ./FontClusterApplyPluginIllustrator ./FontClusterApplyPluginIllustrator.zxp ./zxp-cert.p12 "$ZXP_CERT_PASSWORD"

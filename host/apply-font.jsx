@@ -97,7 +97,7 @@ function fontclusterApplyFont(
     );
 
     if (!textFont) {
-      return "false: Font not available in Illustrator: " + familyName;
+      return "Font not available in Illustrator: " + familyName;
     }
 
     var document = app.documents.length > 0 ? app.activeDocument : app.documents.add();
@@ -113,8 +113,8 @@ function fontclusterApplyFont(
 
     app.redraw();
 
-    return "true: " + modifiedDate;
+    return "ok";
   } catch (error) {
-    return "false: " + error;
+    return String(error);
   }
 }

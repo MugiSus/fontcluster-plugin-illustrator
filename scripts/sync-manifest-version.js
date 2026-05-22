@@ -1,7 +1,12 @@
-const fs = require("node:fs");
-const path = require("node:path");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const version = process.argv[2] || require("../package.json").version;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const packageJson = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "..", "package.json"), "utf8"),
+);
+const version = process.argv[2] || packageJson.version;
 const manifestPath = path.join(__dirname, "..", "CSXS", "manifest.xml");
 
 let manifest = fs.readFileSync(manifestPath, "utf8");
