@@ -13,5 +13,6 @@ export default defineConfig({
   },
   build: {
     target: CEP_RUNTIME_TARGET,
+    emptyOutDir: false,
   },
 });

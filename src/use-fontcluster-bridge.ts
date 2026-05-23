@@ -17,9 +17,16 @@ interface AdobeCepApi {
   evalScript(script: string, callback: (result: string) => void): void;
 }
 
+interface CepRuntime {
+  util?: {
+    openURLInDefaultBrowser(url: string): void;
+  };
+}
+
 declare global {
   interface Window {
     __adobe_cep__?: AdobeCepApi;
+    cep?: CepRuntime;
   }
 }
 
@@ -38,6 +45,18 @@ function evalScript(script: string, callback: (result: string) => void) {
   }
 
   window.__adobe_cep__.evalScript(script, callback);
+}
+
+function createPluginId() {
+  if (window.crypto?.randomUUID) {
+    return window.crypto.randomUUID();
+  }
+
+  try {
+    return uuidv7();
+  } catch {
+    return '';
+  }
 }
 
 function values(record: Record<string, string> | null | undefined) {
@@ -87,7 +106,7 @@ export function useFontclusterBridge(): FontclusterBridge {
   const [errorMessage, setErrorMessage] = createSignal<string | null>(null);
   const [font, setFont] = createSignal<FontclusterFontMetadata | null>(null);
   const [modifiedDate, setModifiedDate] = createSignal<string | null>(null);
-  const pluginId = uuidv7();
+  const pluginId = createPluginId();
 
   onMount(() => {
     let disposed = false;
@@ -162,6 +181,8 @@ export function useFontclusterBridge(): FontclusterBridge {
     }
 
     async function postHeartbeat(documentName: string | null) {
+      if (!pluginId) return;
+
       try {
         await fetch(BRIDGE_HEARTBEAT_URL, {
           method: 'POST',

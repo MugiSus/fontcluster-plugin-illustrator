@@ -3,6 +3,15 @@ import type { Component } from 'solid-js';
 
 import { useFontclusterBridge } from './use-fontcluster-bridge';
 
+function openFontcluster(event: MouseEvent) {
+  event.preventDefault();
+  if (window.cep?.util?.openURLInDefaultBrowser) {
+    window.cep.util.openURLInDefaultBrowser('https://fontcluster.mugisus.me/');
+    return;
+  }
+  // window.open('https://fontcluster.mugisus.me/', '_blank', 'noopener,noreferrer');
+}
+
 const App: Component = () => {
   const { errorMessage, font, isApplied, isApplying, isConnected } =
     useFontclusterBridge();
@@ -17,10 +26,11 @@ const App: Component = () => {
         when={isConnected()}
         fallback={
           <div class="size-full flex flex-col items-center justify-center text-center">
-            <p>No Fontcluster App detected.</p>
+            <p>No Running Fontcluster App detected.</p>
             <a
               class="underline text-sky-600"
               href="https://fontcluster.mugisus.me/"
+              onClick={openFontcluster}
               target="_blank"
               rel="noopener noreferrer"
             >
