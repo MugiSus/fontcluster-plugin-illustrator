@@ -2,10 +2,10 @@
 <ExtensionManifest
   Version="7.0"
   ExtensionBundleId="me.mugisus.fontcluster.illustrator"
-  ExtensionBundleVersion="0.1.4"
-  ExtensionBundleName="Fontcluster Apply">
+  ExtensionBundleVersion="0.1.5"
+  ExtensionBundleName="FontCluster Apply">
   <ExtensionList>
-    <Extension Id="me.mugisus.fontcluster.illustrator.panel" Version="0.1.4" />
+    <Extension Id="me.mugisus.fontcluster.illustrator.panel" Version="0.1.5" />
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
@@ -30,7 +30,7 @@
         </Lifecycle>
         <UI>
           <Type>Panel</Type>
-          <Menu>Fontcluster Apply</Menu>
+          <Menu>FontCluster Apply</Menu>
           <Geometry>
             <Size>
               <Width>280</Width>
