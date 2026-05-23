@@ -9,7 +9,7 @@ const App: Component = () => {
 
   return (
     <main
-      class="text-xs size-full text-gray-500 p-4"
+      class="text-xs size-full text-gray-500 p-4 bg-white"
       role="status"
       aria-live="polite"
     >
