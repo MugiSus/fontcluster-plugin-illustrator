@@ -9,7 +9,6 @@ function openFontcluster(event: MouseEvent) {
     window.cep.util.openURLInDefaultBrowser('https://fontcluster.mugisus.me/');
     return;
   }
-  // window.open('https://fontcluster.mugisus.me/', '_blank', 'noopener,noreferrer');
 }
 
 const App: Component = () => {
