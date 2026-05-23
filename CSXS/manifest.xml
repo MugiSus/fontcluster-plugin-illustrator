@@ -2,10 +2,10 @@
 <ExtensionManifest
   Version="7.0"
   ExtensionBundleId="me.mugisus.fontcluster.illustrator"
-  ExtensionBundleVersion="0.1.5"
+  ExtensionBundleVersion="0.1.6"
   ExtensionBundleName="FontCluster Apply">
   <ExtensionList>
-    <Extension Id="me.mugisus.fontcluster.illustrator.panel" Version="0.1.5" />
+    <Extension Id="me.mugisus.fontcluster.illustrator.panel" Version="0.1.6" />
   </ExtensionList>
   <ExecutionEnvironment>
     <HostList>
