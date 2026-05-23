@@ -70,6 +70,8 @@ function fontclusterCreateTextFrame(document, contents) {
 
   textFrame.contents = contents;
   textFrame.textRange.characterAttributes.size = 16;
+  app.selection = null;
+  textFrame.selected = true;
 
   return textFrame;
 }
@@ -100,7 +102,11 @@ function fontclusterApplyFont(
       return "Font not available in Illustrator: " + familyName;
     }
 
-    var document = app.documents.length > 0 ? app.activeDocument : app.documents.add();
+    if (app.documents.length === 0) {
+      return "Open an Illustrator document before applying a font.";
+    }
+
+    var document = app.activeDocument;
     var frames = fontclusterSelectedTextFrames();
 
     if (frames.length === 0) {
