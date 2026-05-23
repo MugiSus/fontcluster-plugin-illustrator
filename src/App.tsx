@@ -26,7 +26,7 @@ const App: Component = () => {
         when={isConnected()}
         fallback={
           <div class="size-full flex flex-col items-center justify-center text-center">
-            <p>No Running Fontcluster App detected.</p>
+            <p>No running Fontcluster App detected.</p>
             <a
               class="underline text-sky-600"
               href="https://fontcluster.mugisus.me/"
