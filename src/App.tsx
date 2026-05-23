@@ -25,7 +25,7 @@ const App: Component = () => {
         when={isConnected()}
         fallback={
           <div class="size-full flex flex-col items-center justify-center text-center">
-            <p>No running Fontcluster App detected.</p>
+            <p>No FontCluster app running.</p>
             <a
               class="underline text-sky-600"
               href="https://fontcluster.mugisus.me/"
@@ -33,12 +33,12 @@ const App: Component = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              What's Fontcluster?
+              What's FontCluster?
             </a>
           </div>
         }
       >
-        <div class="font-semibold text-neutral-900 mb-1">Fontcluster</div>
+        <div class="font-semibold text-neutral-900 mb-1">FontCluster</div>
         <Show when={font()} fallback="Click an item on the List panel.">
           {(currentFont) => (
             <>
