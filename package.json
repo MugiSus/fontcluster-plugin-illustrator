@@ -2,27 +2,9 @@
   "name": "fontcluster-plugin-illustrator",
   "version": "0.1.5",
   "description": "Adobe Illustrator CEP extension for applying the latest Fontcluster font selection.",
-  "type": "module",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
-    "typecheck": "tsc --noEmit",
-    "check": "tsc --noEmit && node --check --input-type=commonjs < host/apply-font.jsx"
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.1.13",
-    "tailwindcss": "^4.1.13",
-    "typescript": "^5.9.2",
-    "vite": "^7.1.4",
-    "vite-plugin-singlefile": "^2.3.3",
-    "vite-plugin-solid": "^2.11.8"
-  },
-  "dependencies": {
-    "solid-js": "^1.9.9",
-    "uuid": "^14.0.0"
+    "check": "node --check client/index.js && node --check --input-type=commonjs < host/apply-font.jsx"
   }
 }

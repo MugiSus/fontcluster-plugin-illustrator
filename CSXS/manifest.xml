@@ -22,7 +22,7 @@
     <Extension Id="me.mugisus.fontcluster.illustrator.panel">
       <DispatchInfo>
         <Resources>
-          <MainPath>./dist/index.html</MainPath>
+          <MainPath>./client/index.html</MainPath>
           <ScriptPath>./host/apply-font.jsx</ScriptPath>
         </Resources>
         <Lifecycle>

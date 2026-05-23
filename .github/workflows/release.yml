@@ -26,8 +26,6 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm build
-
       - run: pnpm check
 
       - name: Build ZXP
@@ -40,7 +38,7 @@ jobs:
           chmod +x ZXPSignCmd
 
           mkdir FontClusterApplyPluginIllustrator
-          cp -R CSXS dist host FontClusterApplyPluginIllustrator/
+          cp -R CSXS client host FontClusterApplyPluginIllustrator/
 
           printf '%s' "$ZXP_CERT" | base64 -D > zxp-cert.p12
           ./ZXPSignCmd -sign ./FontClusterApplyPluginIllustrator "./FontClusterApplyPluginIllustrator-${VERSION}.zxp" ./zxp-cert.p12 "$ZXP_CERT_PASSWORD"
