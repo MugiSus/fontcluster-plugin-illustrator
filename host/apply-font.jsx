@@ -85,6 +85,7 @@ function fontclusterApplyFont(
   preferredStyleNames,
   styleNames,
   previewText,
+  sampleText,
   modifiedDate
 ) {
   try {
@@ -110,7 +111,7 @@ function fontclusterApplyFont(
     var frames = fontclusterSelectedTextFrames();
 
     if (frames.length === 0) {
-      frames.push(fontclusterCreateTextFrame(document, previewText || fontName || familyName));
+      frames.push(fontclusterCreateTextFrame(document, previewText || sampleText || fontName || familyName));
     }
 
     for (var i = 0; i < frames.length; i += 1) {

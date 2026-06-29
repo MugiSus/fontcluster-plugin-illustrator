@@ -11,7 +11,7 @@
 
   var state = {
     modifiedDate: null,
-    session: null,
+    previewText: null,
     applying: false,
   };
 
@@ -134,7 +134,9 @@
       "," +
       stringArrayLiteral(values(font.style_names)) +
       "," +
-      stringLiteral(state.session && state.session.preview_text) +
+      stringLiteral((state.previewText || "").trim()) +
+      "," +
+      stringLiteral((font.sample_text || "").trim()) +
       "," +
       JSON.stringify(state.modifiedDate) +
       ")";
@@ -171,7 +173,7 @@
         }
 
         state.modifiedDate = response.modified_date;
-        state.session = response.session || null;
+        state.previewText = response.preview_text || null;
         applyFont(response.font);
       },
       function () {
